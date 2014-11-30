@@ -29,11 +29,11 @@
 		private void InitializeComponent()
 		{
 			this.dgvMouseData = new System.Windows.Forms.DataGridView();
-			this.btnStart = new System.Windows.Forms.Button();
-			this.btnStop = new System.Windows.Forms.Button();
 			this.dgvColMouseTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dgvColMouseX = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dgvColMouseY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnStart = new System.Windows.Forms.Button();
+			this.btnStop = new System.Windows.Forms.Button();
 			this.txtUpdatesPerSecond = new System.Windows.Forms.TextBox();
 			this.lblUpdatePerSec = new System.Windows.Forms.Label();
 			this.txtDataLife = new System.Windows.Forms.TextBox();
@@ -67,27 +67,6 @@
 			this.dgvMouseData.Size = new System.Drawing.Size(418, 349);
 			this.dgvMouseData.TabIndex = 0;
 			// 
-			// btnStart
-			// 
-			this.btnStart.Location = new System.Drawing.Point(12, 12);
-			this.btnStart.Name = "btnStart";
-			this.btnStart.Size = new System.Drawing.Size(75, 23);
-			this.btnStart.TabIndex = 1;
-			this.btnStart.Text = "START";
-			this.btnStart.UseVisualStyleBackColor = true;
-			this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-			// 
-			// btnStop
-			// 
-			this.btnStop.Enabled = false;
-			this.btnStop.Location = new System.Drawing.Point(12, 38);
-			this.btnStop.Name = "btnStop";
-			this.btnStop.Size = new System.Drawing.Size(75, 23);
-			this.btnStop.TabIndex = 2;
-			this.btnStop.Text = "STOP";
-			this.btnStop.UseVisualStyleBackColor = true;
-			this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-			// 
 			// dgvColMouseTime
 			// 
 			this.dgvColMouseTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -113,6 +92,27 @@
 			this.dgvColMouseY.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.dgvColMouseY.Width = 39;
 			// 
+			// btnStart
+			// 
+			this.btnStart.Location = new System.Drawing.Point(12, 12);
+			this.btnStart.Name = "btnStart";
+			this.btnStart.Size = new System.Drawing.Size(75, 23);
+			this.btnStart.TabIndex = 1;
+			this.btnStart.Text = "START";
+			this.btnStart.UseVisualStyleBackColor = true;
+			this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+			// 
+			// btnStop
+			// 
+			this.btnStop.Enabled = false;
+			this.btnStop.Location = new System.Drawing.Point(12, 38);
+			this.btnStop.Name = "btnStop";
+			this.btnStop.Size = new System.Drawing.Size(75, 23);
+			this.btnStop.TabIndex = 2;
+			this.btnStop.Text = "STOP";
+			this.btnStop.UseVisualStyleBackColor = true;
+			this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+			// 
 			// txtUpdatesPerSecond
 			// 
 			this.txtUpdatesPerSecond.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -133,7 +133,8 @@
 			// 
 			// txtDataLife
 			// 
-			this.txtDataLife.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtDataLife.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.txtDataLife.Location = new System.Drawing.Point(226, 40);
 			this.txtDataLife.Name = "txtDataLife";
 			this.txtDataLife.Size = new System.Drawing.Size(204, 20);
@@ -150,6 +151,8 @@
 			// 
 			// btnGenerateGraph
 			// 
+			this.btnGenerateGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnGenerateGraph.Location = new System.Drawing.Point(12, 421);
 			this.btnGenerateGraph.Name = "btnGenerateGraph";
 			this.btnGenerateGraph.Size = new System.Drawing.Size(418, 23);

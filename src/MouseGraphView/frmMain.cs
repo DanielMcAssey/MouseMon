@@ -100,7 +100,7 @@ namespace MouseGraphView
 
 		private void btnGenerateGraph_Click(object sender, EventArgs e)
 		{
-			frmGraph graphWindow = new frmGraph();
+			frmGraph graphWindow = new frmGraph(this.MouseMonitor.GetFullDataset());
 			graphWindow.Show();
 		} 
 	}
