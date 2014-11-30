@@ -1,7 +1,13 @@
 # MouseMon
 ========
 
+### Description
+
 Mouse Tracker library, can be used for anti cheat to detect non-human movements with heuristics analysis.
+
+### Example Uses
+
+Comes with 1 example application, shows a graph of all logged mouse movements.
 
 ### Directory Structure
 - /src - All source files
