@@ -14,12 +14,19 @@ namespace MouseMon
 		#endregion
 
 		#region "Settings"
+
+		/// <summary>
+		/// Setting: Set how many times you want to record the mouse.
+		/// </summary>
 		public int UpdatesPerSecond
 		{
 			get;
 			set;
 		}
 
+		/// <summary>
+		/// Setting: Set the maximum amount of seconds to record data for in memory.
+		/// </summary>
 		public int MaxSecondsToRecord
 		{
 			get;
@@ -35,6 +42,9 @@ namespace MouseMon
 		private List<MouseData> MouseDataCollection;
 		private Timer MousePollTimer;
 
+		/// <summary>
+		/// Flag [r/o]: Is current mouse being recorded, this is used to check to see if initial data has been recorded.
+		/// </summary>
 		public bool FMouseRecorded
 		{
 			get
@@ -43,6 +53,9 @@ namespace MouseMon
 			}
 		}
 
+		/// <summary>
+		/// Flag [r/o]: Is new data available from mouse, this is updated as soon as new data has been received.
+		/// </summary>
 		public bool FMouseNewData
 		{
 			get
@@ -53,6 +66,9 @@ namespace MouseMon
 			}
 		}
 
+		/// <summary>
+		/// Variable: Latest Mouse Position X
+		/// </summary>
 		public int MouseX
 		{
 			get
@@ -61,6 +77,9 @@ namespace MouseMon
 			}
 		}
 
+		/// <summary>
+		/// Variable: Latest Mouse Position Y
+		/// </summary>
 		public int MouseY
 		{
 			get
@@ -72,15 +91,13 @@ namespace MouseMon
 
 		public MouseMonitor()
 		{
-			//Set default vars
-			this.UpdatesPerSecond = 100;
-			this.MaxSecondsToRecord = 60;
+			this.Clear();
 		}
 
 		/// <summary>
 		/// Gets last data added
 		/// </summary>
-		public MouseData GetLatestData()
+		public MouseData GetLastData()
 		{
 			if(MouseDataCollection.Count > 0)
 			{
@@ -90,6 +107,15 @@ namespace MouseMon
 			{
 				return new MouseData();
 			}
+		}
+
+		/// <summary>
+		/// Gets last data added from DateTime
+		/// </summary>
+		public List<MouseData> GetLatestDataFromDate(DateTime from)
+		{
+			IEnumerable<MouseData> results = MouseDataCollection.Where(s => s.MouseRecordedTime >= from);
+			return results.ToList<MouseData>();
 		}
 
 		/// <summary>
@@ -133,6 +159,31 @@ namespace MouseMon
 		}
 
 		/// <summary>
+		/// Clear all stored data and reset flags to default
+		/// </summary>
+		public void Clear()
+		{
+			this.FLAG_CurrentMouseRecorded = false;
+			this.FLAG_NewMouseData = false;
+			this.CurrentMouseX = 0;
+			this.CurrentMouseY = 0;
+			this.UpdatesPerSecond = 100;
+			this.MaxSecondsToRecord = 60;
+
+			if(this.MouseDataCollection != null)
+			{
+				this.MouseDataCollection.Clear();
+				this.MouseDataCollection = null;
+			}
+
+			if(this.MousePollTimer != null)
+			{
+				this.MousePollTimer.Stop();
+				this.MousePollTimer = null;
+			}
+		}
+
+		/// <summary>
 		/// Update the mouse position with new data
 		/// </summary>
 		private MouseData PollUpdate()
@@ -142,6 +193,7 @@ namespace MouseMon
 			newMouseData.MouseX = currentMouseData.X;
 			newMouseData.MouseY = currentMouseData.Y;
 			newMouseData.MouseRecordedTime = DateTime.Now;
+			newMouseData.MouseButtonPressed = MouseInput.GetMouseButtonState();
 			return newMouseData;
 		}
 
@@ -150,10 +202,8 @@ namespace MouseMon
 		/// </summary>
 		private void PushNewData(MouseData newData)
 		{
-			this.CurrentMouseX = new int(); //redeclare the int so memory gets reaassigned, safer
-			this.CurrentMouseY = new int();
-			this.CurrentMouseX = (int)newData.MouseX; //Recast to same var type - reassign mem, safer
-			this.CurrentMouseY = (int)newData.MouseY;
+			this.CurrentMouseX = newData.MouseX;
+			this.CurrentMouseY = newData.MouseY;
 
 			this.MouseDataCollection.Add(newData);
 			if (!this.FLAG_CurrentMouseRecorded)
@@ -172,7 +222,8 @@ namespace MouseMon
 		{
 			for(int i = 0; i < this.MouseDataCollection.Count; i++)
 			{
-				//PROBLEM: The list MUST be ordered in last item added being first in list
+				//PROBLEM: The list MUST be ordered in first item added being first in list, if list is not ordered by date this will not give the correct answer.
+				//TODO: NEED TO FIX
 				if (this.MouseDataCollection[i].MouseRecordedTime > DateTime.Now.AddSeconds(-this.MaxSecondsToRecord))
 					break;
 				else

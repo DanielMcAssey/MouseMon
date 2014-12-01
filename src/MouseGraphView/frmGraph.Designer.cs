@@ -49,6 +49,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			chartArea1.AxisX.Minimum = 0D;
 			chartArea1.AxisX.Title = "X Position";
+			chartArea1.AxisY.IsReversed = true;
 			chartArea1.AxisY.Minimum = 0D;
 			chartArea1.AxisY.Title = "Y Position";
 			chartArea1.Name = "ChartArea1";
@@ -69,31 +70,34 @@
 			series2.Name = "Last 5 seconds";
 			this.chrtMousePos.Series.Add(series1);
 			this.chrtMousePos.Series.Add(series2);
-			this.chrtMousePos.Size = new System.Drawing.Size(595, 427);
+			this.chrtMousePos.Size = new System.Drawing.Size(949, 420);
 			this.chrtMousePos.TabIndex = 0;
-			this.chrtMousePos.Text = "chart1";
+			this.chrtMousePos.Text = "Mouse Position Chart";
 			// 
 			// btnPlay
 			// 
-			this.btnPlay.Location = new System.Drawing.Point(12, 496);
+			this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnPlay.Location = new System.Drawing.Point(12, 489);
 			this.btnPlay.Name = "btnPlay";
 			this.btnPlay.Size = new System.Drawing.Size(75, 23);
 			this.btnPlay.TabIndex = 1;
 			this.btnPlay.Text = "Play";
 			this.btnPlay.UseVisualStyleBackColor = true;
+			this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
 			// 
 			// tbPlot
 			// 
 			this.tbPlot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbPlot.Location = new System.Drawing.Point(12, 445);
+			this.tbPlot.Location = new System.Drawing.Point(12, 438);
 			this.tbPlot.Name = "tbPlot";
-			this.tbPlot.Size = new System.Drawing.Size(595, 45);
+			this.tbPlot.Size = new System.Drawing.Size(949, 45);
 			this.tbPlot.TabIndex = 2;
 			// 
 			// btnShowBoth
 			// 
-			this.btnShowBoth.Location = new System.Drawing.Point(276, 496);
+			this.btnShowBoth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnShowBoth.Location = new System.Drawing.Point(630, 489);
 			this.btnShowBoth.Name = "btnShowBoth";
 			this.btnShowBoth.Size = new System.Drawing.Size(75, 23);
 			this.btnShowBoth.TabIndex = 3;
@@ -103,7 +107,8 @@
 			// 
 			// btnShowRecent
 			// 
-			this.btnShowRecent.Location = new System.Drawing.Point(357, 496);
+			this.btnShowRecent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnShowRecent.Location = new System.Drawing.Point(711, 489);
 			this.btnShowRecent.Name = "btnShowRecent";
 			this.btnShowRecent.Size = new System.Drawing.Size(100, 23);
 			this.btnShowRecent.TabIndex = 4;
@@ -113,7 +118,8 @@
 			// 
 			// btnShowAllButRecent
 			// 
-			this.btnShowAllButRecent.Location = new System.Drawing.Point(463, 496);
+			this.btnShowAllButRecent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnShowAllButRecent.Location = new System.Drawing.Point(817, 489);
 			this.btnShowAllButRecent.Name = "btnShowAllButRecent";
 			this.btnShowAllButRecent.Size = new System.Drawing.Size(144, 23);
 			this.btnShowAllButRecent.TabIndex = 5;
@@ -125,7 +131,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(619, 531);
+			this.ClientSize = new System.Drawing.Size(973, 524);
 			this.Controls.Add(this.btnShowAllButRecent);
 			this.Controls.Add(this.btnShowRecent);
 			this.Controls.Add(this.btnShowBoth);

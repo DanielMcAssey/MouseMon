@@ -64,7 +64,7 @@
 			this.dgvMouseData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvMouseData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.dgvMouseData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvMouseData.Size = new System.Drawing.Size(418, 349);
+			this.dgvMouseData.Size = new System.Drawing.Size(418, 398);
 			this.dgvMouseData.TabIndex = 0;
 			// 
 			// dgvColMouseTime
@@ -153,7 +153,7 @@
 			// 
 			this.btnGenerateGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGenerateGraph.Location = new System.Drawing.Point(12, 421);
+			this.btnGenerateGraph.Location = new System.Drawing.Point(12, 470);
 			this.btnGenerateGraph.Name = "btnGenerateGraph";
 			this.btnGenerateGraph.Size = new System.Drawing.Size(418, 23);
 			this.btnGenerateGraph.TabIndex = 7;
@@ -165,7 +165,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(442, 456);
+			this.ClientSize = new System.Drawing.Size(442, 505);
 			this.Controls.Add(this.btnGenerateGraph);
 			this.Controls.Add(this.lblMaxSeconds);
 			this.Controls.Add(this.txtDataLife);

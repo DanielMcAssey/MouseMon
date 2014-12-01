@@ -49,7 +49,7 @@ namespace MouseGraphView
 				{
 					if (this.MouseMonitor.FMouseNewData) //Only new data
 					{
-						currentWorker.ReportProgress(0, this.MouseMonitor.GetLatestData());
+						currentWorker.ReportProgress(0, this.MouseMonitor.GetLastData());
 					}
 				}
 				else
@@ -70,6 +70,9 @@ namespace MouseGraphView
 			btnGenerateGraph.Enabled = true;
 			btnStop.Enabled = true;
 			btnStart.Enabled = false;
+
+			//Reset mouse monitor
+			this.MouseMonitor.Clear();
 
 			int updatesPerSecond;
 			bool isNumeric = int.TryParse(txtUpdatesPerSecond.Text, out updatesPerSecond);
@@ -101,7 +104,15 @@ namespace MouseGraphView
 		private void btnGenerateGraph_Click(object sender, EventArgs e)
 		{
 			frmGraph graphWindow = new frmGraph(this.MouseMonitor.GetFullDataset());
+			graphWindow.FormClosed += frmGraphClose;
 			graphWindow.Show();
-		} 
+			btnGenerateGraph.Enabled = false;
+
+		}
+
+		private void frmGraphClose(object sender, EventArgs e)
+		{
+			btnGenerateGraph.Enabled = true;
+		}
 	}
 }

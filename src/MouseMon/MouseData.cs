@@ -7,5 +7,6 @@ namespace MouseMon
 		public int MouseX;
 		public int MouseY;
 		public DateTime MouseRecordedTime;
+		public MouseButtonState MouseButtonPressed;
 	}
 }

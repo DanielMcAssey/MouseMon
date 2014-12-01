@@ -5,6 +5,14 @@ using System.Text;
 
 namespace MouseMon
 {
+	public enum MouseButtonState
+	{
+		None,
+		Left,
+		Middle,
+		Right
+	}
+
 	static class MouseInput
 	{
 		/// <summary>
@@ -48,6 +56,15 @@ namespace MouseMon
 			GetCursorPos(out lpPoint);
 
 			return lpPoint;
+		}
+
+		/// <summary>
+		/// Retrieves the mouse button state.
+		/// </summary>
+		/// <see>See MSDN documentation for further information.</see>
+		public static MouseButtonState GetMouseButtonState()
+		{
+			return MouseButtonState.None;
 		}
 	}
 }

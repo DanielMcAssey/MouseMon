@@ -13,6 +13,7 @@ namespace MouseGraphView
 {
 	public partial class frmGraph : Form
 	{
+		private bool IsPlaying = false;
 		private List<MouseData> PlotData;
 
 		public frmGraph(List<MouseData> _plotData)
@@ -24,21 +25,25 @@ namespace MouseGraphView
 		private void frmGraph_Load(object sender, EventArgs e)
 		{
 			btnShowBoth.Enabled = false;
+
+			Rectangle primaryResolution = Screen.PrimaryScreen.Bounds;
+			chrtMousePos.ChartAreas[0].Axes[0].Maximum = primaryResolution.Width;
+			chrtMousePos.ChartAreas[0].Axes[1].Maximum = primaryResolution.Height;
 			
 			DateTime lastTimeRecorded = PlotData[PlotData.Count-1].MouseRecordedTime;
 			List<MouseData> Last5Seconds = PlotData.Where(s => s.MouseRecordedTime >= lastTimeRecorded.AddSeconds(-5)).ToList<MouseData>();
 			List<MouseData> EverythingElse = PlotData.Where(s => s.MouseRecordedTime < lastTimeRecorded.AddSeconds(-5)).ToList<MouseData>();
 			
 			for (int i = 0; i < EverythingElse.Count; i++)
-			{
 				chrtMousePos.Series[0].Points.AddXY(EverythingElse[i].MouseX, EverythingElse[i].MouseY);
-			}
 
 			for (int i = 0; i < Last5Seconds.Count; i++)
-			{
 				chrtMousePos.Series[1].Points.AddXY(Last5Seconds[i].MouseX, Last5Seconds[i].MouseY);
-			}
 			
+			for(int i = 0; i < PlotData.Count; i++)
+			{
+				//TODO: Add Mouse Button States
+			}
 		}
 
 		private void btnShowBoth_Click(object sender, EventArgs e)
@@ -66,6 +71,28 @@ namespace MouseGraphView
 			btnShowAllButRecent.Enabled = false;
 			chrtMousePos.Series[0].Enabled = true;
 			chrtMousePos.Series[1].Enabled = false;
+		}
+
+		private void btnPlay_Click(object sender, EventArgs e)
+		{
+			if (IsPlaying)
+				StopChartAnimation();
+			else
+				PlayChartAnimation();
+		}
+
+		private void PlayChartAnimation()
+		{
+			IsPlaying = true;
+			btnPlay.Text = "Stop";
+		}
+
+		private void StopChartAnimation()
+		{
+			IsPlaying = false;
+			btnPlay.Text = "Play";
+
+
 		}
 	}
 }
