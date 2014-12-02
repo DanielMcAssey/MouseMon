@@ -28,18 +28,26 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.chrtMousePos = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.btnPlay = new System.Windows.Forms.Button();
 			this.tbPlot = new System.Windows.Forms.TrackBar();
 			this.btnShowBoth = new System.Windows.Forms.Button();
 			this.btnShowRecent = new System.Windows.Forms.Button();
 			this.btnShowAllButRecent = new System.Windows.Forms.Button();
+			this.lblPointsText = new System.Windows.Forms.Label();
+			this.lblPointsCount = new System.Windows.Forms.Label();
+			this.lblSpeedMultiplier = new System.Windows.Forms.Label();
+			this.numSpeedMultiplier = new System.Windows.Forms.NumericUpDown();
+			this.tmrAnimateGraph = new System.Windows.Forms.Timer(this.components);
+			this.btnResetPoints = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.chrtMousePos)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.tbPlot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numSpeedMultiplier)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// chrtMousePos
@@ -47,29 +55,29 @@
 			this.chrtMousePos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			chartArea1.AxisX.Minimum = 0D;
-			chartArea1.AxisX.Title = "X Position";
-			chartArea1.AxisY.IsReversed = true;
-			chartArea1.AxisY.Minimum = 0D;
-			chartArea1.AxisY.Title = "Y Position";
-			chartArea1.Name = "ChartArea1";
-			this.chrtMousePos.ChartAreas.Add(chartArea1);
-			legend1.Alignment = System.Drawing.StringAlignment.Center;
-			legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend1.Name = "Main Legend";
-			this.chrtMousePos.Legends.Add(legend1);
+			chartArea3.AxisX.Minimum = 0D;
+			chartArea3.AxisX.Title = "X Position";
+			chartArea3.AxisY.IsReversed = true;
+			chartArea3.AxisY.Minimum = 0D;
+			chartArea3.AxisY.Title = "Y Position";
+			chartArea3.Name = "ChartArea1";
+			this.chrtMousePos.ChartAreas.Add(chartArea3);
+			legend3.Alignment = System.Drawing.StringAlignment.Center;
+			legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+			legend3.Name = "Main Legend";
+			this.chrtMousePos.Legends.Add(legend3);
 			this.chrtMousePos.Location = new System.Drawing.Point(12, 12);
 			this.chrtMousePos.Name = "chrtMousePos";
-			series1.ChartArea = "ChartArea1";
-			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series1.Legend = "Main Legend";
-			series1.Name = "Position";
-			series2.ChartArea = "ChartArea1";
-			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-			series2.Legend = "Main Legend";
-			series2.Name = "Last 5 seconds";
-			this.chrtMousePos.Series.Add(series1);
-			this.chrtMousePos.Series.Add(series2);
+			series5.ChartArea = "ChartArea1";
+			series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series5.Legend = "Main Legend";
+			series5.Name = "Position";
+			series6.ChartArea = "ChartArea1";
+			series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+			series6.Legend = "Main Legend";
+			series6.Name = "Last 5 seconds";
+			this.chrtMousePos.Series.Add(series5);
+			this.chrtMousePos.Series.Add(series6);
 			this.chrtMousePos.Size = new System.Drawing.Size(949, 420);
 			this.chrtMousePos.TabIndex = 0;
 			this.chrtMousePos.Text = "Mouse Position Chart";
@@ -93,6 +101,7 @@
 			this.tbPlot.Name = "tbPlot";
 			this.tbPlot.Size = new System.Drawing.Size(949, 45);
 			this.tbPlot.TabIndex = 2;
+			this.tbPlot.Scroll += new System.EventHandler(this.tbPlot_Scroll);
 			// 
 			// btnShowBoth
 			// 
@@ -127,11 +136,85 @@
 			this.btnShowAllButRecent.UseVisualStyleBackColor = true;
 			this.btnShowAllButRecent.Click += new System.EventHandler(this.btnShowAllButRecent_Click);
 			// 
+			// lblPointsText
+			// 
+			this.lblPointsText.AutoSize = true;
+			this.lblPointsText.Location = new System.Drawing.Point(165, 494);
+			this.lblPointsText.Name = "lblPointsText";
+			this.lblPointsText.Size = new System.Drawing.Size(98, 13);
+			this.lblPointsText.TabIndex = 6;
+			this.lblPointsText.Text = "Captured Positions:";
+			// 
+			// lblPointsCount
+			// 
+			this.lblPointsCount.AutoSize = true;
+			this.lblPointsCount.Location = new System.Drawing.Point(269, 494);
+			this.lblPointsCount.Name = "lblPointsCount";
+			this.lblPointsCount.Size = new System.Drawing.Size(24, 13);
+			this.lblPointsCount.TabIndex = 7;
+			this.lblPointsCount.Text = "0/0";
+			// 
+			// lblSpeedMultiplier
+			// 
+			this.lblSpeedMultiplier.AutoSize = true;
+			this.lblSpeedMultiplier.Location = new System.Drawing.Point(93, 494);
+			this.lblSpeedMultiplier.Name = "lblSpeedMultiplier";
+			this.lblSpeedMultiplier.Size = new System.Drawing.Size(12, 13);
+			this.lblSpeedMultiplier.TabIndex = 8;
+			this.lblSpeedMultiplier.Text = "x";
+			// 
+			// numSpeedMultiplier
+			// 
+			this.numSpeedMultiplier.DecimalPlaces = 1;
+			this.numSpeedMultiplier.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+			this.numSpeedMultiplier.Location = new System.Drawing.Point(111, 492);
+			this.numSpeedMultiplier.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+			this.numSpeedMultiplier.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+			this.numSpeedMultiplier.Name = "numSpeedMultiplier";
+			this.numSpeedMultiplier.Size = new System.Drawing.Size(48, 20);
+			this.numSpeedMultiplier.TabIndex = 9;
+			this.numSpeedMultiplier.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+			// 
+			// tmrAnimateGraph
+			// 
+			this.tmrAnimateGraph.Tick += new System.EventHandler(this.tmrAnimateGraph_Tick);
+			// 
+			// btnResetPoints
+			// 
+			this.btnResetPoints.Location = new System.Drawing.Point(549, 489);
+			this.btnResetPoints.Name = "btnResetPoints";
+			this.btnResetPoints.Size = new System.Drawing.Size(75, 23);
+			this.btnResetPoints.TabIndex = 10;
+			this.btnResetPoints.Text = "Reset Points";
+			this.btnResetPoints.UseVisualStyleBackColor = true;
+			this.btnResetPoints.Click += new System.EventHandler(this.btnResetPoints_Click);
+			// 
 			// frmGraph
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(973, 524);
+			this.Controls.Add(this.btnResetPoints);
+			this.Controls.Add(this.numSpeedMultiplier);
+			this.Controls.Add(this.lblSpeedMultiplier);
+			this.Controls.Add(this.lblPointsCount);
+			this.Controls.Add(this.lblPointsText);
 			this.Controls.Add(this.btnShowAllButRecent);
 			this.Controls.Add(this.btnShowRecent);
 			this.Controls.Add(this.btnShowBoth);
@@ -145,6 +228,7 @@
 			this.Load += new System.EventHandler(this.frmGraph_Load);
 			((System.ComponentModel.ISupportInitialize)(this.chrtMousePos)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.tbPlot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numSpeedMultiplier)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -158,5 +242,11 @@
 		private System.Windows.Forms.Button btnShowBoth;
 		private System.Windows.Forms.Button btnShowRecent;
 		private System.Windows.Forms.Button btnShowAllButRecent;
+		private System.Windows.Forms.Label lblPointsText;
+		private System.Windows.Forms.Label lblPointsCount;
+		private System.Windows.Forms.Label lblSpeedMultiplier;
+		private System.Windows.Forms.NumericUpDown numSpeedMultiplier;
+		private System.Windows.Forms.Timer tmrAnimateGraph;
+		private System.Windows.Forms.Button btnResetPoints;
 	}
 }
